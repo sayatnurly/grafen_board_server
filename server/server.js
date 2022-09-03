@@ -13,20 +13,25 @@ const port = process.env.PORT || 3000
 io.on('connection', (socket) => {
     console.log(`${socket.id} has connectd`)
 
-    socket.on('draw', (data) => {
-        socket.broadcast.emit('data', { x: data.x, y: data.y, strokeWidth: data.strokeWidth, strokeColor: data.strokeColor })
-    })
+    socket.on('openRoom', (room) => {
+      console.log('room', socket.id, room)
+      socket.join(room)
 
-    socket.on('up', (data) => {
-        socket.broadcast.emit('onUp', data)
-    })
+      socket.on('draw', (data) => {
+          socket.broadcast.to(room).emit('data', { x: data.x, y: data.y, strokeWidth: data.strokeWidth, strokeColor: data.strokeColor })
+      })
 
-    socket.on('down', (data) => {
-        socket.broadcast.emit('onDown', { x: data.x, y: data.y })
-    })
-    
-    socket.on('reset', (data) => {
-        socket.broadcast.emit('onReset', { cnvWidth: data.cnvWidth, cnvHeight: data.cnvHeight })
+      socket.on('up', (data) => {
+          socket.broadcast.to(room).emit('onUp', data)
+      })
+
+      socket.on('down', (data) => {
+          socket.broadcast.to(room).emit('onDown', { x: data.x, y: data.y })
+      })
+
+      socket.on('reset', (data) => {
+          socket.broadcast.to(room).emit('onReset', { cnvWidth: data.cnvWidth, cnvHeight: data.cnvHeight })
+      })
     })
 
     socket.on('disconnect', (socket) => console.log(`${socket.id} has disconnected`))
