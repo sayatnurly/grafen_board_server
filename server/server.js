@@ -8,7 +8,7 @@ const io = socketIO(http, {
     },
   })
 
-const port = Number(process.env.PORT) || 3000
+const port = 3000 || 80
 
 io.on('connection', (socket) => {
     console.log(`${socket.id} has connectd`)
