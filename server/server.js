@@ -34,11 +34,16 @@ io.on('connection', (socket) => {
       })
 
       socket.on('undoText', (data) => {
-        socket.broadcast.to(room).emit('onUndoText', data)
+        socket.broadcast.to(room).emit('onUndoText', { recentWords: data[0], allPoints: data[1] } )
+      })
+
+      socket.on('undoDraw', (data) => {
+        console.log(data)
+        socket.broadcast.to(room).emit('onUndoDraw', { allPoints: data[0], recentWords: data[1] } )
       })
 
       socket.on('reset', (data) => {
-        socket.broadcast.to(room).emit('onReset', { cnvWidth: data.cnvWidth, cnvHeight: data.cnvHeight })
+        socket.broadcast.to(room).emit('onReset', { cnvWidth: data[0], cnvHeight: data[1] })
       })
     })
 
