@@ -38,7 +38,6 @@ io.on('connection', (socket) => {
       })
 
       socket.on('undoDraw', (data) => {
-        console.log(data)
         socket.broadcast.to(room).emit('onUndoDraw', { allPoints: data[0], recentWords: data[1] } )
       })
 
