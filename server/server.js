@@ -26,11 +26,15 @@ io.on('connection', (socket) => {
       })
 
       socket.on('down', (data) => {
-        socket.broadcast.to(room).emit('onDown', { x: data[0], y: data[1], width: data[2], height: data[3] })
+        socket.broadcast.to(room).emit('onDown', { x: data[0], y: data[1] })
+      })
+
+      socket.on('ratioSize', (data) => {
+        socket.broadcast.to(room).emit('onRatioSize', { width: data[0], height: data[1] })
       })
 
       socket.on('text', (data) => {
-        socket.broadcast.to(room).emit('onText', { letter: data[0], x: data[1], y: data[2] })
+        socket.broadcast.to(room).emit('onText', { letter: data[0], x: data[1], y: data[2]})
       })
 
       socket.on('undoText', (data) => {
