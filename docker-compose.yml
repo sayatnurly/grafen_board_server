@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  board:
+  grafen_board_server:
     build: .
-    container_name: board
+    container_name: grafen_board_server
     ports:
       - "3000:3000"
     environment:
