@@ -11,7 +11,6 @@ const io = socketIO(http, {
 const port = 3000
 
 io.on('connection', (socket) => {
-    // console.log(`${socket.id} has connectd`)
 
     socket.on('openRoom', (room) => {
       console.log('room', socket.id, room)

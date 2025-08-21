@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  board:
+    build: .
+    container_name: board
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+    restart: unless-stopped
