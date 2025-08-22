@@ -52,6 +52,6 @@ io.on('connection', (socket) => {
     socket.on('disconnect', (socket) => console.log(`${socket.id} has disconnected`))
 })
 
-http.listen(port, () => {
+http.listen(port, '0.0.0.0', () => {
   console.log(`server has been started on port ${port}`)
 })
